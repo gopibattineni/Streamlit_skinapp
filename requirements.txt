@@ -1,8 +1,7 @@
 streamlit
-flask>=2.1.0
-pillow>=10.0.0
-torch>=2.0.1
-torchvision>=0.16.0
+flask
+opencv-python-headless
 numpy<2
-opencv-python-headless>=4.8.0
+pillow
 pdf2image
+tensorflow==2.20.0
