@@ -45,6 +45,12 @@ st.write("Upload an image or PDF report for prediction.")
 
 uploaded_file = st.file_uploader("Upload Image/PDF", type=["jpg", "jpeg", "png", "pdf"])
 
+# Function to get top 3 predictions
+def get_top_predictions(preds, classes, top=3):
+    top_indices = preds[0].argsort()[-top:][::-1]
+    top_classes = [(classes[i], preds[0][i]*100) for i in top_indices]
+    return top_classes
+
 if uploaded_file is not None:
     file_path = os.path.join("uploads", uploaded_file.name)
     if not os.path.exists("uploads"):
@@ -52,20 +58,42 @@ if uploaded_file is not None:
     with open(file_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
 
+    st.markdown("<h2 style='text-align:center'>CIRMSERVIZI</h2>", unsafe_allow_html=True)
+
     if uploaded_file.name.lower().endswith(".pdf"):
         st.info("📄 PDF detected, extracting images...")
         image_paths = extract_images_from_pdf(file_path)
         for idx, img_path in enumerate(image_paths):
             st.image(img_path, caption=f"Page {idx+1}", use_container_width=True)
-            pred_class_index, pred_score = model_predict(img_path, model)
-            st.markdown(
-                f"**Prediction (Page {idx+1}):** {classes[pred_class_index]} "
-                f"with **{pred_score:.2f}%** confidence"
-            )
+            img = image.load_img(img_path, target_size=(224,224))
+            x = image.img_to_array(img)
+            x = np.expand_dims(x, axis=0)
+            x = preprocess_input(x)
+            preds = model.predict(x)
+            
+            top_preds = get_top_predictions(preds, classes, top=3)
+            
+            # Display top 3 predictions with yellow background
+            html_str = "<div style='background-color:yellow; padding:10px; border-radius:5px;'>"
+            html_str += f"<strong>Top 3 Predictions (Page {idx+1}):</strong><br>"
+            for cls, score in top_preds:
+                html_str += f"{cls} - {score:.2f}%<br>"
+            html_str += "</div>"
+            st.markdown(html_str, unsafe_allow_html=True)
     else:
         st.image(file_path, caption="Uploaded Image", use_container_width=True)
-        pred_class_index, pred_score = model_predict(file_path, model)
-        st.markdown(
-            f"**Prediction:** {classes[pred_class_index]} "
-            f"with **{pred_score:.2f}%** confidence"
-        )
+        img = image.load_img(file_path, target_size=(224,224))
+        x = image.img_to_array(img)
+        x = np.expand_dims(x, axis=0)
+        x = preprocess_input(x)
+        preds = model.predict(x)
+        
+        top_preds = get_top_predictions(preds, classes, top=3)
+        
+        html_str = "<div style='background-color:yellow; padding:10px; border-radius:5px;'>"
+        html_str += "<strong>Top 3 Predictions:</strong><br>"
+        for cls, score in top_preds:
+            html_str += f"{cls} - {score:.2f}%<br>"
+        html_str += "</div>"
+        st.markdown(html_str, unsafe_allow_html=True)
+
