@@ -10,7 +10,7 @@ from tensorflow.keras.applications.mobilenet_v3 import preprocess_input
 # Load the trained MobileNetV3 model
 MODEL_PATH = "my_model.keras"
 model = load_model(MODEL_PATH)
-st.success("✅ MobileNetV3 Model loaded successfully!")
+st.success("DEAR DOCTOR, YOUR APP IS READY TO DIAGNOSE")
 
 # Define class names (update based on your dataset)
 classes = ["Actinic keratosis", "Basal cell carcinoma", "Benign keratosis", 
@@ -40,8 +40,27 @@ def extract_images_from_pdf(pdf_file):
     return image_paths
 
 # Streamlit UI
-st.title("🧑‍⚕️ MarineDerma - Skin Disease Detection App")
-st.write("Upload an image or PDF report for prediction.")
+
+# Set page config (optional)
+st.set_page_config(page_title="MarineDerma", layout="centered")
+
+# Inject CSS for light blue background
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #ADD8E6;  /* Light blue */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
+st.title("CIRM SERVIZI Srl, Roma")  # Main title
+st.subheader("🧑‍⚕️ MarineDerma - Skin Disease Detection App")  # Subtitle
+st.write("Upload an image or PDF report for prediction.")  # Description
+
 
 uploaded_file = st.file_uploader("Upload Image/PDF", type=["jpg", "jpeg", "png", "pdf"])
 
