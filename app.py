@@ -56,14 +56,14 @@ if uploaded_file is not None:
         st.info("📄 PDF detected, extracting images...")
         image_paths = extract_images_from_pdf(file_path)
         for idx, img_path in enumerate(image_paths):
-            st.image(img_path, caption=f"Page {idx+1}", use_column_width=True)
+            st.image(img_path, caption=f"Page {idx+1}", use_container_width=True)
             pred_class_index, pred_score = model_predict(img_path, model)
             st.markdown(
                 f"**Prediction (Page {idx+1}):** {classes[pred_class_index]} "
                 f"with **{pred_score:.2f}%** confidence"
             )
     else:
-        st.image(file_path, caption="Uploaded Image", use_column_width=True)
+        st.image(file_path, caption="Uploaded Image", use_container_width=True)
         pred_class_index, pred_score = model_predict(file_path, model)
         st.markdown(
             f"**Prediction:** {classes[pred_class_index]} "
