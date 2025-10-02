@@ -79,9 +79,14 @@ def extract_images_from_pdf(pdf_file):
     return image_paths
 
 # UI
+# Display logo
+st.image("logo.JPG", width=150)  # Adjust width as needed
+
+# Main title and subtitle
 st.markdown('<h1 class="centered">CIRM SERVIZI Srl, Roma</h1>', unsafe_allow_html=True)
 st.markdown('<h3 class="centered">🧑‍⚕️ MarineDerma - Skin Disease Detection App</h3>', unsafe_allow_html=True)
 st.write("Upload an image or PDF report for prediction.")
+
 
 uploaded_file = st.file_uploader("Upload Image/PDF", type=["jpg", "jpeg", "png", "pdf"])
 
