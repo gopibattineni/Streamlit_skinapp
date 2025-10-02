@@ -3,30 +3,49 @@ import cv2
 import numpy as np
 import streamlit as st
 from pdf2image import convert_from_path
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.mobilenet_v3 import preprocess_input
+import torch
+import torch.nn as nn
+import torchvision.transforms as transforms
+from torchvision import models
 
-# Load the trained MobileNetV3 model
-MODEL_PATH = "Streamlit_skinapp\my_model.keras"
-model = load_model(MODEL_PATH)
-st.success("✅ MobileNetV3 Model loaded successfully!")
+# Load a pre-trained MobileNetV3 model (fine-tuned)
+MODEL_PATH = "Streamlit_skinapp/my_model.pth"
 
-# Define class names (update based on your dataset)
+# Define classes (update according to your dataset)
 classes = ["Actinic keratosis", "Basal cell carcinoma", "Benign keratosis", 
            "Chickenpox", "Cowpox", "Dermatofibroma", "HFMD", "Healthy", 
            "Measles", "Melanocytic nevus", "Melanoma", "Monkeypox", 
            "Squamous cell carcinoma", "Vascular lesion"]
 
+# Define device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Load model
+model = models.mobilenet_v3_large(weights=None)  
+model.classifier[3] = nn.Linear(model.classifier[3].in_features, len(classes))  
+model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
+model.to(device)
+model.eval()
+
+st.success("✅ MobileNetV3 Model (PyTorch) loaded successfully!")
+
+# Define preprocessing pipeline
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+])
+
 # Prediction function
 def model_predict(img_path, model):
-    img = image.load_img(img_path, target_size=(224, 224))
-    x = image.img_to_array(img)
-    x = np.expand_dims(x, axis=0)
-    x = preprocess_input(x)
-    preds = model.predict(x)
-    pred_class_index = np.argmax(preds, axis=1)[0]
-    pred_score = np.max(preds) * 100
+    img = cv2.imread(img_path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = transform(img).unsqueeze(0).to(device)
+    
+    with torch.no_grad():
+        preds = model(img)
+        pred_class_index = torch.argmax(preds, dim=1).item()
+        pred_score = torch.softmax(preds, dim=1).max().item() * 100
     return pred_class_index, pred_score
 
 # Extract images from PDF
