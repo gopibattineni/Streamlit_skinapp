@@ -4,4 +4,4 @@ opencv-python-headless
 numpy<2
 pillow
 pdf2image
-tensorflow==2.20.0
+tensorflow==2.16.1
