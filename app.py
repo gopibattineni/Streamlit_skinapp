@@ -79,8 +79,15 @@ def extract_images_from_pdf(pdf_file):
     return image_paths
 
 # UI
-# Display logo
-st.image("logo.JPG", width=150)  # Adjust width as needed
+# Centered logo
+st.markdown(
+    """
+    <div style="text-align:center;">
+        <img src="logo.png" width="150">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # Main title and subtitle
 st.markdown('<h1 class="centered">CIRM SERVIZI Srl, Roma</h1>', unsafe_allow_html=True)
