@@ -8,7 +8,7 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.mobilenet_v3 import preprocess_input
 
 # Load the trained MobileNetV3 model
-MODEL_PATH = "my_model.keras"
+MODEL_PATH = "Streamlit_skinapp\my_model.keras"
 model = load_model(MODEL_PATH)
 st.success("✅ MobileNetV3 Model loaded successfully!")
 
