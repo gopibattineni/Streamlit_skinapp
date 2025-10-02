@@ -46,7 +46,7 @@ st.markdown(
 # Load model
 MODEL_PATH = "my_model.keras"
 model = load_model(MODEL_PATH)
-st.success("✅ MobileNetV3 Model loaded successfully!")
+st.success("Dear Doctor, Your Model is ready to Diagnose")
 
 # Classes
 classes = ["Actinic keratosis", "Basal cell carcinoma", "Benign keratosis", 
