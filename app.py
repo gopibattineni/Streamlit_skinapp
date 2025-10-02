@@ -9,7 +9,7 @@ import torchvision.transforms as transforms
 from torchvision import models
 
 # Load a pre-trained MobileNetV3 model (fine-tuned)
-MODEL_PATH = "Streamlit_skinapp/my_model.pth"
+MODEL_PATH = "my_model.keras"
 
 # Define classes (update according to your dataset)
 classes = ["Actinic keratosis", "Basal cell carcinoma", "Benign keratosis", 
