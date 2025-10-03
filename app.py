@@ -48,17 +48,13 @@ st.markdown(
             font-weight: bold;
             font-size: 16px;
         }
-    </style>
-
-    <div class="logo-container">
-        <img src="logo.JPG" width="200">
-    </div>
-    """,
+    </style> """,
     unsafe_allow_html=True
 )
 
 
 # Load model
+
 MODEL_PATH = "my_model.keras"
 model = load_model(MODEL_PATH)
 # st.success("Dear Doctor, Your Model is ready to Diagnose")
@@ -97,15 +93,8 @@ def extract_images_from_pdf(pdf_file):
 
 # Main title and subtitle
 
-st.markdown(
-    """
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-        <img src="CIRM.png" width="120">
-        <img src="logo.png" width="120">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown(""" <div style="display:flex; justify-content:space-between; align-items:center;">
+        <img src="CIRM.png"> <img src="logo.png"> </div> """, unsafe_allow_html=True)
 
 st.markdown('<h1 class="centered">CIRM Foundation & CIRM SERVIZI Srl</h1>', unsafe_allow_html=True)
 st.markdown('<h3 class="centered">🧑‍⚕️ MarineDerma - Skin Disease Detection App</h3>', unsafe_allow_html=True)
