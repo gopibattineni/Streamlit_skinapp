@@ -13,32 +13,49 @@ st.set_page_config(page_title="MarineDerma", layout="centered")
 st.markdown(
     """
     <style>
-    /* Light blue background */
-    .stApp {
-        background-color: #ADD8E6;
-    }
+        .logo-container {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 9999;
+            background-color: white; /* optional: gives a header effect */
+            width: 100%;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-    /* Center titles */
-    .centered {
-        text-align: center;
-        color: #0B3D91;  /* Dark blue text for contrast */
-    }
+        /* Light blue background */
+        .stApp {
+            background-color: #ADD8E6;
+        }
 
-    /* Yellow prediction box */
-    .prediction-box {
-        background-color: #FFFACD;  /* Light yellow */
-        padding: 15px;
-        border-radius: 10px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+        /* Center titles */
+        .centered {
+            text-align: center;
+            color: #0B3D91;  /* Dark blue text for contrast */
+        }
 
-    /* Bold and slightly larger text inside prediction box */
-    .prediction-box p {
-        font-weight: bold;
-        font-size: 16px;
-    }
+        /* Yellow prediction box */
+        .prediction-box {
+            background-color: #FFFACD;  /* Light yellow */
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Bold and slightly larger text inside prediction box */
+        .prediction-box p {
+            font-weight: bold;
+            font-size: 16px;
+        }
     </style>
+
+    <div class="logo-container">
+        <img src="logo.JPG" width="200">
+    </div>
     """,
     unsafe_allow_html=True
 )
@@ -79,8 +96,7 @@ def extract_images_from_pdf(pdf_file):
     return image_paths
 
 # UI
-# Centered logo
-st.markdown( <img src="logo.JPG" width="200">)
+
 # Main title and subtitle
 st.markdown('<h1 class="centered">CIRM SERVIZI Srl, Roma</h1>', unsafe_allow_html=True)
 st.markdown('<h3 class="centered">🧑‍⚕️ MarineDerma - Skin Disease Detection App</h3>', unsafe_allow_html=True)
