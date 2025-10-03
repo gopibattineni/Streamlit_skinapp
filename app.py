@@ -83,7 +83,7 @@ def extract_images_from_pdf(pdf_file):
 st.markdown(
     """
     <div style="text-align:center;">
-        <img src="logo.JPG" width="150">
+        <img src="logo.JPG" width="200">
     </div>
     """,
     unsafe_allow_html=True
