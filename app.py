@@ -97,6 +97,16 @@ def extract_images_from_pdf(pdf_file):
 
 # Main title and subtitle
 
+st.markdown(
+    """
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <img src="CIRM.png" width="120">
+        <img src="logo.png" width="120">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 st.markdown('<h1 class="centered">CIRM Foundation & CIRM SERVIZI Srl</h1>', unsafe_allow_html=True)
 st.markdown('<h3 class="centered">🧑‍⚕️ MarineDerma - Skin Disease Detection App</h3>', unsafe_allow_html=True)
 st.write("Upload an image or PDF report for prediction.")
