@@ -10,6 +10,7 @@ from tensorflow.keras.applications.mobilenet_v3 import preprocess_input
 st.set_page_config(page_title="MarineDerma", layout="centered")
 
 # Apply CSS for styling
+
 st.markdown(
     """
     <style>
@@ -20,39 +21,42 @@ st.markdown(
             transform: translateX(-50%);
             text-align: center;
             z-index: 9999;
-            background-color: white; /* optional: gives a header effect */
+            background-color: white;
             width: 100%;
             padding: 10px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* Light blue background */
         .stApp {
             background-color: #ADD8E6;
         }
 
-        /* Center titles */
         .centered {
             text-align: center;
-            color: #0B3D91;  /* Dark blue text for contrast */
+            color: #0B3D91;
         }
 
-        /* Yellow prediction box */
         .prediction-box {
-            background-color: #FFFACD;  /* Light yellow */
+            background-color: #FFFACD;
             padding: 15px;
             border-radius: 10px;
             margin-top: 10px;
             margin-bottom: 10px;
         }
 
-        /* Bold and slightly larger text inside prediction box */
         .prediction-box p {
             font-weight: bold;
             font-size: 16px;
         }
     </style>
+
+    <div class="logo-container">
+        <img src="logo.JPG" width="200">
+    </div>
+    """,
+    unsafe_allow_html=True
 )
+
 
 # Load model
 MODEL_PATH = "my_model.keras"
@@ -92,15 +96,6 @@ def extract_images_from_pdf(pdf_file):
 # UI
 
 # Main title and subtitle
-
-st.markdown(
-    """
-    <div class="logo-container">
-        <img src="logo.JPG" width="200">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
 
 st.markdown('<h1 class="centered">CIRM Foundation & CIRM SERVIZI Srl</h1>', unsafe_allow_html=True)
 st.markdown('<h3 class="centered">🧑‍⚕️ MarineDerma - Skin Disease Detection App</h3>', unsafe_allow_html=True)
