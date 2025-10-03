@@ -52,18 +52,12 @@ st.markdown(
             font-size: 16px;
         }
     </style>
-
-    <div class="logo-container">
-        <img src="logo.JPG" width="200">
-    </div>
-    """,
-    unsafe_allow_html=True
 )
 
 # Load model
 MODEL_PATH = "my_model.keras"
 model = load_model(MODEL_PATH)
-st.success("Dear Doctor, Your Model is ready to Diagnose")
+# st.success("Dear Doctor, Your Model is ready to Diagnose")
 
 # Classes
 classes = ["Actinic keratosis", "Basal cell carcinoma", "Benign keratosis", 
@@ -98,7 +92,17 @@ def extract_images_from_pdf(pdf_file):
 # UI
 
 # Main title and subtitle
-st.markdown('<h1 class="centered">CIRM SERVIZI Srl, Roma</h1>', unsafe_allow_html=True)
+
+st.markdown(
+    """
+    <div class="logo-container">
+        <img src="logo.JPG" width="200">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown('<h1 class="centered">CIRM Foundation & CIRM SERVIZI Srl</h1>', unsafe_allow_html=True)
 st.markdown('<h3 class="centered">🧑‍⚕️ MarineDerma - Skin Disease Detection App</h3>', unsafe_allow_html=True)
 st.write("Upload an image or PDF report for prediction.")
 
