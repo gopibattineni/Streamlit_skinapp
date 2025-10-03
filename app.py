@@ -80,15 +80,7 @@ def extract_images_from_pdf(pdf_file):
 
 # UI
 # Centered logo
-st.markdown(
-    """
-    <div style="text-align:center;">
-        <img src="logo.JPG" width="200">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
+st.markdown( <img src="logo.JPG" width="200">)
 # Main title and subtitle
 st.markdown('<h1 class="centered">CIRM SERVIZI Srl, Roma</h1>', unsafe_allow_html=True)
 st.markdown('<h3 class="centered">🧑‍⚕️ MarineDerma - Skin Disease Detection App</h3>', unsafe_allow_html=True)
